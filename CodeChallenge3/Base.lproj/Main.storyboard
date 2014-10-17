@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LmZ-8o-mni">
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LmZ-8o-mni">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="Tqs-s4-Eet">
@@ -59,35 +59,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Ybh-Mi-NWx"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dxq-W8-WaA">
-                                <rect key="frame" x="0.0" y="118" width="600" height="482"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="BO6-Z7-KgE">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BO6-Z7-KgE" id="RMd-Xu-AlW">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="LmZ-8o-mni" secondAttribute="trailing" constant="-16" id="2BQ-d7-0hC"/>
-                            <constraint firstItem="dxq-W8-WaA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="54" id="CE0-Pl-oBV"/>
                             <constraint firstItem="LmZ-8o-mni" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Ffa-Vx-Y5w"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LmZ-8o-mni" secondAttribute="bottom" id="RKi-Ab-5VI"/>
-                            <constraint firstItem="dxq-W8-WaA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pRz-9y-Fns"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dxq-W8-WaA" secondAttribute="bottom" id="v1o-0H-jTa"/>
                             <constraint firstItem="LmZ-8o-mni" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="wD6-3T-rWD"/>
-                            <constraint firstAttribute="trailing" secondItem="dxq-W8-WaA" secondAttribute="trailing" id="x7G-TQ-uqt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QJ4-JN-pgb"/>
                     <connections>
-                        <outlet property="seachTable" destination="dxq-W8-WaA" id="0vD-Zw-tOj"/>
                         <outlet property="searchBar" destination="Tqs-s4-Eet" id="qQh-Rs-Bu4"/>
                         <outlet property="tableView" destination="LmZ-8o-mni" id="7HP-MN-qD6"/>
                     </connections>

@@ -16,8 +16,9 @@
 @property NSMutableArray *bikeStations;
 @property CLLocationManager *locationManger;
 @property CLLocationCoordinate2D userLocation;
-@property (strong, nonatomic) IBOutlet UITableView *seachTable;
+@property (strong, nonatomic) IBOutlet UITableView *searchTable;
 @property NSMutableArray *searchResults;
+@property NSMutableArray *allBikeStations;
 @end
 
 @implementation StationsListViewController
@@ -25,9 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.seachTable.hidden = YES;
+    self.searchTable.hidden = YES;
     self.bikeStations = [NSMutableArray array];
-
+    self.allBikeStations = [NSMutableArray array];
     self.locationManger = [[CLLocationManager alloc] init];
     [self.locationManger requestWhenInUseAuthorization];
     self.locationManger.delegate = self;
@@ -41,6 +42,7 @@
 
         for (NSDictionary *bikeStation in results[@"stationBeanList"]) {
             [self.bikeStations addObject:bikeStation];
+            [self.allBikeStations addObject:bikeStation];
         }
         [self.tableView reloadData];
     }];
@@ -57,13 +59,15 @@
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    self.seachTable.hidden = YES;
+    [self.bikeStations removeAllObjects];
+    [self.tableView reloadData];
+    self.searchTable.hidden = YES;
     [self.searchResults removeAllObjects];
-    for (NSDictionary *location in self.bikeStations) {
+    for (NSDictionary *location in self.allBikeStations) {
         if ([location[@"stationName"] containsString:searchText]) {
             NSLog(@"%@", location);
-            [self.searchResults addObject:location];
-            [self.seachTable reloadData];
+            [self.bikeStations addObject:location];
+            [self.tableView reloadData];
         }
     }
 }
@@ -73,27 +77,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag ==1) {
-        return self.searchResults.count;
-    }else{
+
         return self.bikeStations.count;
-    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (tableView.tag == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell"];
-        NSDictionary *bikeStation = [self.searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = bikeStation[@"stationName"];
-        cell.detailTextLabel.text = bikeStation[@"stAddress1"];
 
-        UILabel *label = [UILabel new];
-        label.frame = CGRectMake(300.0f, 5.0f, 100.0f, 50.0f);
-        label.text = [NSString stringWithFormat:@"%@ bikes",bikeStation[@"availableDocks"]];
-        [cell addSubview:label];
-    }else{
         cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         NSDictionary *bikeStation = [self.bikeStations objectAtIndex:indexPath.row];
         cell.textLabel.text = bikeStation[@"stationName"];
@@ -103,8 +94,6 @@
         label.frame = CGRectMake(300.0f, 5.0f, 100.0f, 50.0f);
         label.text = [NSString stringWithFormat:@"%@ bikes",bikeStation[@"availableDocks"]];
         [cell addSubview:label];
-    }
-
 
     return cell;
 }
